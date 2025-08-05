@@ -1,0 +1,52 @@
+<div class="max-w-xl mx-auto mt-10 mb-20 p-6 bg-white rounded-lg shadow-md overflow-y-auto">
+
+  <h2 class="text-xl font-bold mb-4">
+    {{ isEditMode ? 'Editar Producto' : 'Agregar Nuevo Producto' }}
+  </h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div>
+      <label>Nombre</label>
+      <input formControlName="nameProduct" class="w-full p-2 border rounded" />
+    </div>
+<button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+      {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+    </button>
+    <div>
+      <label>Descripción</label>
+      <textarea formControlName="description" class="w-full p-2 border rounded"></textarea>
+    </div>
+
+    <div>
+      <label>Imagen URL</label>
+      <input formControlName="imagesUrl" class="w-full p-2 border rounded" />
+    </div>
+
+    <div>
+      <label>Precio</label>
+      <input type="number" formControlName="price" class="w-full p-2 border rounded" />
+    </div>
+
+    <div>
+      <label>Stock</label>
+      <input type="number" formControlName="stock" class="w-full p-2 border rounded" />
+    </div>
+
+    <div>
+      <label>Estado</label>
+      <select formControlName="stateProduct" class="w-full p-2 border rounded">
+        <option value="Available">Disponible</option>
+        <option value="NotAvailable">No Disponible</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Categoría</label>
+      <input type="number" formControlName="categoryId" class="w-full p-2 border rounded" />
+    </div>
+
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+      {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+    </button>
+  </form>
+</div>

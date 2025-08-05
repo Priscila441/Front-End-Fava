@@ -17,4 +17,13 @@ export class Navbar {
   addToCart() {
     this.cartCount++;
   }
+  showCategoryDropdown = false;
+
+  toggleCategoryDropdown() {
+    this.showCategoryDropdown = !this.showCategoryDropdown;
+  }
+
+  closeDropdown() {
+    this.showCategoryDropdown = false;
+  }
 }
