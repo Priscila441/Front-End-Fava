@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { CartService } from '../../../services/cart.service';
+import { Cart } from '../../../core/models/cart.model';
 
 @Component({
   selector: 'app-navbar',
@@ -10,13 +12,19 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './navbar.css'
 })
 export class Navbar {
-  cartCount = 0;
 
-  // Simulación: podrías tener una función para incrementar el carrito
-  // En un proyecto real esto vendría de un servicio compartido
-  addToCart() {
-    this.cartCount++;
-  }
+cartCount = 0;
+constructor(private cartService: CartService) {}
+ngOnInit() {
+  this.cartService.cart$.subscribe(cart => {
+    this.cartCount = cart
+      ? cart.cartDetail.reduce((acc, item) => acc + item.quantity, 0)
+      : 0;
+  });
+
+  this.cartService.fetchCart();
+}
+
   showCategoryDropdown = false;
 
   toggleCategoryDropdown() {

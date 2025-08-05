@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../core/models/product.model';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ import { CommonModule } from '@angular/common';
 export class Home implements OnInit{
   products: Product[] = [];
 
-  constructor(private productService: ProductService){}
+  constructor(private productService: ProductService,private cartService: CartService){}
+
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe({
       next: (res) => {
@@ -23,4 +25,11 @@ export class Home implements OnInit{
       error: (err) => console.error('Error al cargar productos', err)
     });
   }
+
+  addToCart(productId: number) {
+  this.cartService.addProduct(productId).subscribe({
+    next: (cart) => this.cartService.fetchCart(), // actualizar carrito en navbar
+    error: (err) => console.error(err),
+  });
+}
 }

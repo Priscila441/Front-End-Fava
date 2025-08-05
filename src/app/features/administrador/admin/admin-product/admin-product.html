@@ -1,6 +1,6 @@
 <div class="p-4">
-  <h1 class="text-xl font-bold mb-4">Administrar Productos</h1>
-  <a routerLink="/admin/create" class="mb-4 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">
+  <h1 class="text-xl font-bold mb-4 ">Administrar Productos</h1>
+  <a routerLink="/admin/product-form" class="mb-4 inline-block bg-blue-400 text-white px-4 py-2 rounded hover:bg-blue-500">
     + Agregar Producto
   </a>
   <div *ngIf="products.length > 0; else noProducts">
@@ -10,6 +10,7 @@
           <th class="text-left p-2">Nombre</th>
           <th class="text-left p-2">Precio</th>
           <th class="text-left p-2">Stock</th>
+          <th class="text-left p-2">categoryId</th>
           <th class="text-left p-2">Acciones</th>
         </tr>
       </thead>
@@ -18,8 +19,9 @@
           <td class="p-2">{{ product.nameProduct }}</td>
           <td class="p-2">${{ product.price }}</td>
           <td class="p-2">{{ product.stock }}</td>
+          <td class="p-2">{{ product.categoryId }}</td>
           <td class="p-2 space-x-2">
-            <a [routerLink]="['/admin/edit', product.idProduct]" class="text-blue-600 hover:underline">Editar</a>
+            <a [routerLink]="['/admin/product-form', product.idProduct]" class="text-blue-600 hover:underline">Editar</a>
             <button (click)="deleteProduct(product.idProduct)" class="text-red-600 hover:underline">Eliminar</button>
           </td>
         </tr>

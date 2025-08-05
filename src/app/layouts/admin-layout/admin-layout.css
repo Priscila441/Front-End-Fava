@@ -1,0 +1,13 @@
+/* admin-layout.css */
+a {
+  padding: 0.5rem 0;
+  display: block;
+}
+
+a:hover {
+  color: #60a5fa;
+}
+
+.router-link-active {
+  font-weight: bold;
+}

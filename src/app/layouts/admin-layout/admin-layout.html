@@ -1,0 +1,15 @@
+<!-- admin-layout.html -->
+<div class="flex h-screen">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-gray-800 text-white flex flex-col p-4 space-y-4">
+    <h2 class="text-lg font-bold">Admin Panel</h2>
+    <a routerLink="/admin/products" routerLinkActive="font-semibold text-blue-400">Productos</a>
+    <a routerLink="/home" routerLinkActive="font-semibold text-blue-400">Volver al Home</a>
+ 
+</aside>
+
+  <!-- Main content -->
+  <main class="flex-1 overflow-auto p-6 bg-gray-100">
+    <router-outlet></router-outlet>
+  </main>
+</div>

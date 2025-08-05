@@ -1,4 +1,4 @@
-<div class="max-w-xl mx-auto mt-10 mb-20 p-6 bg-white rounded-lg shadow-md overflow-y-auto">
+<div class="max-w-l mx-auto mt-10 mb-20 p-6 bg-white rounded-lg shadow-md overflow-y-auto">
 
   <h2 class="text-xl font-bold mb-4">
     {{ isEditMode ? 'Editar Producto' : 'Agregar Nuevo Producto' }}
@@ -9,9 +9,7 @@
       <label>Nombre</label>
       <input formControlName="nameProduct" class="w-full p-2 border rounded" />
     </div>
-<button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-      {{ isEditMode ? 'Actualizar' : 'Guardar' }}
-    </button>
+
     <div>
       <label>Descripción</label>
       <textarea formControlName="description" class="w-full p-2 border rounded"></textarea>
