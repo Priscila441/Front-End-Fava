@@ -27,9 +27,12 @@ export class Home implements OnInit{
   }
 
   addToCart(productId: number) {
-  this.cartService.addProduct(productId).subscribe({
-    next: (cart) => this.cartService.fetchCart(), // actualizar carrito en navbar
-    error: (err) => console.error(err),
-  });
+    this.cartService.addProduct(productId, 1).subscribe({
+      next: () => {
+        this.cartService.fetchCart(); 
+      },
+      error: (err) => console.error(err),
+    });
+  }
 }
-}
+

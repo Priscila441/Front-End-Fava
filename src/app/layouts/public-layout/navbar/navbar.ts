@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CartService } from '../../../services/cart.service';
 import { Cart } from '../../../core/models/cart.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MatIconModule, CommonModule],
+  imports: [MatIconModule, CommonModule, RouterLink],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
 })

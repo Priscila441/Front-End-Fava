@@ -1,10 +1,7 @@
 import { Routes } from '@angular/router';
-import { Home } from './features/home/home';
-import { Admin } from './features/administrador/admin/admin';
-import { AdminProduct } from './features/administrador/admin/admin-product/admin-product';
-import { ProductForm } from './features/administrador/admin/product-form/product-form';
 import { PublicLayout } from './layouts/public-layout/public-layout';
 import { AdminLayout } from './layouts/admin-layout/admin-layout';
+import { CartComponent } from './features/cart/cartComponent';
 
 export const routes: Routes = [
   {
@@ -12,7 +9,9 @@ export const routes: Routes = [
     component: PublicLayout,
     children: [
       { path: '', loadComponent: () => import('./features/home/home').then(m => m.Home) },
-      // podés agregar otras públicas aquí
+      //Públicas
+      { path: 'home', redirectTo: '', pathMatch: 'full' },
+      { path: 'cart', component: CartComponent },
     ]
   },
   {
@@ -39,4 +38,5 @@ export const routes: Routes = [
 
     ]
   }
+  
 ];

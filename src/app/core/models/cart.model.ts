@@ -1,3 +1,4 @@
+
 export interface Cart {
   total: number;
   cartDetail: CartDetail[];

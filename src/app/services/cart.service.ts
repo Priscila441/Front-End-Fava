@@ -6,7 +6,7 @@ import { Cart, CartDetail } from '../core/models/cart.model';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
-  private apiUrl = 'https://tu-api.com/api/cart'; // Cambiá por tu URL real
+  private apiUrl = 'http://localhost:5054/api/Cart'; 
   private cartSubject = new BehaviorSubject<Cart | null>(null);
   cart$ = this.cartSubject.asObservable();
 
@@ -39,4 +39,9 @@ export class CartService {
   removeProduct(productId: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}detail/cart-detail/${productId}`);
   }
+
+  confirmOrder(): Observable<any> {
+  return this.http.post(`${this.apiUrl}/checkout`, {});
+}
+
 }
