@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { CartService } from '../../services/cart.service';
+import { CartService } from '../../core/services/cart.service';
 import { Cart } from '../../core/models/cart.model';
 
 @Component({

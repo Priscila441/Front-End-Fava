@@ -1,7 +1,7 @@
 <div class="p-4">
   <h1 class="text-xl font-bold mb-4">Carrito de Compras</h1>
 
-  <div *ngIf="cart && cart.cartDetail.length > 0; else emptyCart">
+  @if (cart && cart.cartDetail.length > 0) {
     <table class="min-w-full bg-white shadow-md rounded overflow-hidden">
       <thead class="bg-gray-200">
         <tr>
@@ -14,30 +14,37 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of cart.cartDetail" class="border-t hover:bg-gray-50">
-          <td class="p-3">
-            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8" alt="" class="w-16 h-16 object-cover rounded">
-          <td class="p-3">{{ item.productId }}</td>
-          <td class="p-3">
-            <input
-              type="number"
-              class="border rounded w-16 px-2 py-1"
-              [value]="item.quantity"
-              (change)="updateQuantity(item.productId, $any($event.target).value)"
-              min="1"
-            />
-          </td>
-          <td class="p-3">{{ item.unitPrice| currency }}</td>
-          <td class="p-3">{{ item.subTotal | currency }}</td>
-          <td class="p-3 space-x-2">
-            <button
-              (click)="removeProduct(item.productId)"
-              class="text-red-600 hover:underline"
-            >
-              Eliminar
-            </button>
-          </td>
-        </tr>
+        @for (item of cart.cartDetail; track item.productId) {
+          <tr class="border-t hover:bg-gray-50">
+            <td class="p-3">
+              <img
+                src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8"
+                alt="imagen del producto"
+                class="w-16 h-16 object-cover rounded"
+              />
+            </td>
+            <td class="p-3">{{ item.productId }}</td>
+            <td class="p-3">
+              <input
+                type="number"
+                class="border rounded w-16 px-2 py-1"
+                [value]="item.quantity"
+                (change)="updateQuantity(item.productId, $any($event.target).value)"
+                min="1"
+              />
+            </td>
+            <td class="p-3">{{ item.UnitPrice | currency }}</td>
+            <td class="p-3">{{ item.subTotal | currency }}</td>
+            <td class="p-3 space-x-2">
+              <button
+                (click)="removeProduct(item.productId)"
+                class="text-red-600 hover:underline"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        }
       </tbody>
     </table>
 
@@ -60,9 +67,7 @@
         </button>
       </div>
     </div>
-  </div>
-
-  <ng-template #emptyCart>
+  } @else {
     <p class="text-gray-600 text-center mt-10">El carrito está vacío.</p>
-  </ng-template>
+  }
 </div>

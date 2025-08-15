@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { CartService } from '../../../services/cart.service';
-import { Cart } from '../../../core/models/cart.model';
+import { CartService } from '../../../core/services/cart.service';
 import { RouterLink } from '@angular/router';
 
 @Component({

@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { PublicLayout } from './layouts/public-layout/public-layout';
 import { AdminLayout } from './layouts/admin-layout/admin-layout';
 import { CartComponent } from './features/cart/cartComponent';
+import { Login } from './features/login/login';
+import { Register } from './features/register/register';
 
 export const routes: Routes = [
   {
@@ -12,6 +14,8 @@ export const routes: Routes = [
       //Públicas
       { path: 'home', redirectTo: '', pathMatch: 'full' },
       { path: 'cart', component: CartComponent },
+      { path: 'auth', component: Login },
+      { path: 'register', component: Register },
     ]
   },
   {

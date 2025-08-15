@@ -11,12 +11,8 @@
         class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm"
       >
         <li>
-          <a
-            href="/home"
-            class="text-gray-900 dark:text-white hover:text-blue-700"
-            aria-current="page"
-            >Home</a
-          >
+          <a routerLink="/home" class="text-gray-900 dark:text-white hover:text-blue-700" aria-current="page">Home</a>
+
         </li>
 
         <li class="relative ">
@@ -89,12 +85,12 @@
 
     <div class="flex items-center space-x-6 rtl:space-x-reverse">
       <button
-        
         type="button"
-        class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+        class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700"
       >
-        <a href="/admin">Iniciar Sesión</a>
+        <a routerLink="/auth">Iniciar Sesión</a>
       </button>
+
 
       <a routerLink="/cart" class="relative text-sm text-gray-500 hover:underline">
         <mat-icon>shopping_cart</mat-icon>

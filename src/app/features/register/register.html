@@ -1,0 +1,18 @@
+<div class="max-w-sm mx-auto mt-10 p-4 border rounded shadow">
+  <h2 class="text-xl font-semibold mb-4">Crear Cuenta</h2>
+
+  @if (error) { <div class="text-red-600 mb-2">{{ error }}</div> }
+
+  <form (ngSubmit)="register()" #registerForm="ngForm" novalidate>
+    <label for="name" class="block mb-1">Nombre:</label>
+    <input id="name" [(ngModel)]="name" name="name" type="text" class="w-full border p-2 mb-2 rounded" required autocomplete="name" />
+
+    <label for="email" class="block mb-1">Email:</label>
+    <input id="email" [(ngModel)]="email" name="email" type="email" class="w-full border p-2 mb-2 rounded" required autocomplete="email" />
+
+    <label for="password" class="block mb-1">Contraseña:</label>
+    <input id="password" [(ngModel)]="password" name="password" type="password" class="w-full border p-2 mb-4 rounded" required autocomplete="new-password" />
+
+    <button type="submit" [disabled]="registerForm.invalid" class="w-full bg-green-600 hover:bg-green-700 text-white p-2 rounded disabled:opacity-50">Registrarse</button>
+  </form>
+</div>

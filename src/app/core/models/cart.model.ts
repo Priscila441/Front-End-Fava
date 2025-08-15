@@ -7,7 +7,7 @@ export interface Cart {
 export interface CartDetail {
   productId: number;
   quantity: number;
-  unitPrice: number;
+  UnitPrice: number;
   subTotal: number;
   cartId: number;
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../services/product.service';
+import { ProductService } from '../../core/services/product.service';
 import { Product } from '../../core/models/product.model';
 import { CommonModule } from '@angular/common';
-import { CartService } from '../../services/cart.service';
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +24,7 @@ export class Home implements OnInit{
       },
       error: (err) => console.error('Error al cargar productos', err)
     });
+    
   }
 
   addToCart(productId: number) {
