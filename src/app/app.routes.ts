@@ -4,6 +4,8 @@ import { AdminLayout } from './layouts/admin-layout/admin-layout';
 import { CartComponent } from './features/cart/cartComponent';
 import { Login } from './features/login/login';
 import { Register } from './features/register/register';
+import { adminGuard } from './core/guards/admin.guard';
+
 
 export const routes: Routes = [
   {
@@ -14,13 +16,17 @@ export const routes: Routes = [
       //Públicas
       { path: 'home', redirectTo: '', pathMatch: 'full' },
       { path: 'cart', component: CartComponent },
-      { path: 'auth', component: Login },
+      { path: 'auth', component: Login, },
       { path: 'register', component: Register },
+      {path: 'product/:id',loadComponent: () => import('./features/product-detail/product-detail').then(m => m.ProductDetail)
+}
+
     ]
   },
   {
     path: 'admin',
     component: AdminLayout,
+    canActivate: [adminGuard],
     children: [
       {
         path: '',

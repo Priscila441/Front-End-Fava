@@ -3,6 +3,7 @@ import { ProductService } from '../../core/services/product.service';
 import { Product } from '../../core/models/product.model';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../core/services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ import { CartService } from '../../core/services/cart.service';
 export class Home implements OnInit{
   products: Product[] = [];
 
-  constructor(private productService: ProductService,private cartService: CartService){}
+  constructor(private productService: ProductService,private cartService: CartService, private router: Router){}
 
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe({
@@ -35,5 +36,10 @@ export class Home implements OnInit{
       error: (err) => console.error(err),
     });
   }
+
+  goToProduct(id: number): void {
+  this.router.navigate(['/product', id]);
+}
+
 }
 

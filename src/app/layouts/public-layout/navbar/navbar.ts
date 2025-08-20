@@ -2,7 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CartService } from '../../../core/services/cart.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
+
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +16,7 @@ import { RouterLink } from '@angular/router';
 export class Navbar {
 
 cartCount = 0;
-constructor(private cartService: CartService) {}
+constructor(private cartService: CartService, public authService: AuthService, private router:Router) {}
 ngOnInit() {
   this.cartService.cart$.subscribe(cart => {
     this.cartCount = cart
@@ -34,4 +36,9 @@ ngOnInit() {
   closeDropdown() {
     this.showCategoryDropdown = false;
   }
+  logout(): void {
+  this.authService.clearAuth(); // borra token y user
+  this.router.navigate(['/home']); // redirige al home
+}
+
 }

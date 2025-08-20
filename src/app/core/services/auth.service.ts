@@ -1,38 +1,80 @@
-// src/app/core/services/auth.service.ts
-
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
+import {jwtDecode} from 'jwt-decode';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
+
+
+interface DecodedToken {
+  sub: string;
+  email: string;
+  role: string;
+  exp: number;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly STORAGE_KEY = 'loggedUser';
+  private readonly TOKEN_KEY = 'token';
+  private readonly USER_KEY = 'user';
 
-  setUser(user: User): void {
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(user));
+  private apiUrl = 'http://localhost:5054/api/User';
+
+  constructor(private http: HttpClient) {}
+
+  login(email: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login`, { email, password })
+      .pipe(
+        tap(response => {
+          this.setAuth(response.token, response.user);
+        })
+      );
+  }
+
+  setAuth(token: string, user: User): void {
+    localStorage.setItem(this.TOKEN_KEY, token);
+    localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem(this.TOKEN_KEY);
   }
 
   getUser(): User | null {
-    const data = localStorage.getItem(this.STORAGE_KEY);
+    const data = localStorage.getItem(this.USER_KEY);
     return data ? JSON.parse(data) : null;
   }
 
-  clearUser(): void {
-    localStorage.removeItem(this.STORAGE_KEY);
-  }
-
-  isAdmin(): boolean {
-    const user = this.getUser();
-    return user?.Role === 'Admin';
+  clearAuth(): void {
+    localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.USER_KEY);
   }
 
   isLoggedIn(): boolean {
-    return this.getUser() !== null;
+    const token = this.getToken();
+    if (!token) return false;
+
+    try {
+      const decoded: DecodedToken = jwtDecode(token);
+      return decoded.exp * 1000 > Date.now();
+    } catch {
+      return false;
+    }
   }
 
+  isAdmin(): boolean {
+  const token = this.getToken();
+  if (!token) return false;
+
+  try {
+    const decoded: any = jwtDecode(token);
+    return decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === 'Admin';
+  } catch {
+    return false;
+  }
+}
   getUserId(): number | null {
-    const user = this.getUser();
-    return user?.IdUser ?? null;
+    return this.getUser()?.IdUser ?? null;
   }
 }

@@ -40,8 +40,4 @@ export class CartService {
     return this.http.delete(`${this.apiUrl}detail/cart-detail/${productId}`);
   }
 
-  confirmOrder(): Observable<any> {
-  return this.http.post(`${this.apiUrl}/checkout`, {});
-}
-
 }

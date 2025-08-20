@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { UserService } from '../../core/services/user.service';
 import { AuthService } from '../../core/services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,25 +18,35 @@ export class Login {
   error: string = '';
 
   constructor(
-    private userService: UserService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
-  login() {
-  this.userService.login(this.email, this.password).subscribe({
-    next: user => {
-      this.authService.setUser(user);
-      alert('¡Bienvenido!');
-      const redirect = this.authService.isAdmin() ? '/admin' : '/';
-      
-      this.router.navigateByUrl(redirect);
-    },
-    error: () => {
-      this.error = 'Email o contraseña incorrectos';
-    }
-  });
-}
+    login() {
+    this.authService.login(this.email, this.password).subscribe({
+      next: () => {
+        // Obtenemos la URL a la que el usuario quería ir antes de loguearse
+        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+
+        if (this.authService.isAdmin()) {
+          // Si es admin, redirige al panel de admin
+          this.router.navigate(['/admin']);
+        } else if (returnUrl) {
+          // Si venimos de otra ruta protegida, redirigimos allí
+          this.router.navigateByUrl(returnUrl);
+        } else {
+          // Si no, al home
+          this.router.navigate(['/home']);
+        }
+      },
+      error: err => {
+        console.error(err);
+        alert('Credenciales incorrectas');
+      }
+    });
+  }
+
 
 
 }
