@@ -30,7 +30,6 @@ The application is **not finished yet**, so some features are still under develo
 - **RxJS** for reactive programming  
 - **Zone.js** for change detection  
 - **JWT Decode** for authentication  
-- Built and tested with **Karma** + **Jasmine**
 
 ---
 
