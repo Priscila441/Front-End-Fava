@@ -5,7 +5,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       @for (product of products; track product.idProduct) {
         <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
-          <img [src]="product.imagesUrl" alt="{{ product.nameProduct }}" class="cursor-pointer hover:scale-110"(click)="goToProduct(product.idProduct)" />
+          <img [src]="product.imagesUrl" alt="{{ product.nameProduct }}" class="cursor-pointer hover:scale-110 transition-transform duration-300 w-full h-48 object-cover"(click)="goToProduct(product.idProduct)" />
           
           <div class="p-4 flex flex-col flex-grow">
             <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ product.nameProduct }}</h3>

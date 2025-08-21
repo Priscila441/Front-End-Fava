@@ -1,16 +1,16 @@
-
 export interface Order {
-  IdOrder: number;
-  DateTime: string;
-  StateOrder: number;
-  PaymentMethod: string;
-  UserId: number;
-  OrderDetails: OrderDetail[];
-  Total: number;
+  idOrder: number;
+  dateTime: string;
+  stateOrder: number; 
+  paymentMethod: string;
+  userId: number;
+  orderDetails: OrderDetail[];
+  total: number;
 }
+
 export interface OrderDetail {
-  Quantity: number;
-  UnitPrice: number;
-  ProductName: string;
-  SubTotal: number;
+  quantity: number;
+  unitPrice: number;
+  productName: string;
+  subTotal: number;
 }

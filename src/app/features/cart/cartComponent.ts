@@ -65,6 +65,7 @@ export class CartComponent implements OnInit {
       next: (res) => {
         // una vez creada, pedir la orden completa
         this.orderService.getOrderById(res.idOrder).subscribe(order => {
+          console.log(order);
           this.currentOrder = order;
           this.showPaymentOptions = false;
           this.showOrderModal = true;

@@ -18,7 +18,7 @@
           <tr class="border-t hover:bg-gray-50">
             <td class="p-3">
               <img
-                src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8"
+                src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8"                
                 alt="imagen del producto"
                 class="w-16 h-16 object-cover rounded"
               />
@@ -72,11 +72,11 @@
           </label>
 
           <label class="block mb-2">
-            <input type="radio" name="paymentMethod" value="TarjetaCredito" [(ngModel)]="selectedPaymentMethod"/> Tarjeta de Crédito
+            <input type="radio" name="paymentMethod" value="Efectivo" [(ngModel)]="selectedPaymentMethod"/> Efectivo 
           </label>
 
           <label class="block mb-2">
-            <input type="radio" name="paymentMethod" value="Transferencia" [(ngModel)]="selectedPaymentMethod"/> Transferencia bancaria
+            <input type="radio" name="paymentMethod" value="Tarjeta" [(ngModel)]="selectedPaymentMethod"/> Tarjeta débito/crédito
           </label>
 
           <div class="mt-4 flex gap-2">
@@ -96,14 +96,15 @@
   <div class="fixed inset-0 backdrop-blur-lg bg-opacity-50 flex items-center justify-center">
     <div class="bg-white rounded-lg shadow-lg p-6 w-96">
       <h2 class="text-xl font-bold mb-4">Resumen de la Orden</h2>
-      <p><strong>ID:</strong> {{ currentOrder.IdOrder }}</p>
-      <p><strong>Método de Pago:</strong> {{ currentOrder.PaymentMethod }}</p>
-      <p><strong>Total:</strong> {{ currentOrder.Total | currency }}</p>
+      <p><strong>ID:</strong> {{ currentOrder.idOrder }}</p>
+      <p><strong>Método de Pago:</strong> {{ currentOrder.paymentMethod }}</p>
+      <p><strong>Estado de la Orden</strong> {{currentOrder.stateOrder}} </p>
+      <p><strong>Total:</strong> {{ cart?.total | currency }}</p>
 
       <h3 class="mt-4 font-semibold">Productos:</h3>
       <ul class="list-disc pl-5">
-        @for (item of currentOrder.OrderDetails; track $index) {
-          <li>{{ item.ProductName }} x{{ item.Quantity }} - {{ item.SubTotal | currency }}</li>
+        @for (item of currentOrder.orderDetails; track $index) {
+          <li>{{ item.productName }} x{{ item.quantity }} - {{ item.subTotal | currency }}</li>
         }
       </ul>
 

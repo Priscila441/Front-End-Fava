@@ -30,13 +30,10 @@ export class Login {
         const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
 
         if (this.authService.isAdmin()) {
-          // Si es admin, redirige al panel de admin
           this.router.navigate(['/admin']);
         } else if (returnUrl) {
-          // Si venimos de otra ruta protegida, redirigimos allí
           this.router.navigateByUrl(returnUrl);
         } else {
-          // Si no, al home
           this.router.navigate(['/home']);
         }
       },

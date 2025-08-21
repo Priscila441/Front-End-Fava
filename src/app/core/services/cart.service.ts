@@ -1,8 +1,10 @@
 // cart.service.ts
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Cart, CartDetail } from '../models/cart.model';
+import { Cart } from '../models/cart.model';
+import { catchError } from 'rxjs/operators';
+
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
@@ -14,11 +16,13 @@ export class CartService {
 
   // Obtener carrito activo
   fetchCart() {
-    this.http.get<Cart>(`${this.apiUrl}/active`).subscribe({
-      next: (cart) => this.cartSubject.next(cart),
-      error: () => this.cartSubject.next(null),
-    });
-  }
+  this.http.get<Cart>(`${this.apiUrl}/active`)
+    .pipe(
+      catchError(() => of(null)) // si hay error, devuelve observable de null
+    )
+    .subscribe(cart => this.cartSubject.next(cart));
+}
+
 
   // Añadir producto
   addProduct(productId: number, quantity = 1): Observable<Cart> {
@@ -27,8 +31,12 @@ export class CartService {
 
   // Eliminar carrito completo
   clearCart(): Observable<any> {
-    return this.http.delete(`${this.apiUrl}`);
-  }
+  return this.http.delete(`${this.apiUrl}`)
+    .pipe(
+      catchError(() => of({ deleted: false })) // si hay error, devolvemos objeto por defecto
+    );
+}
+
 
   // Actualizar cantidad en detalle
   updateQuantity(productId: number, quantity: number): Observable<any> {
