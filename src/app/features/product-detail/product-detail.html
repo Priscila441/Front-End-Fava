@@ -28,10 +28,10 @@
       </div>
 
       <div class="flex gap-4">
-        <button (click)="addToCart(product?.idProduct!)"
-                [disabled]="product?.stateProduct !== 'Available'"
-                class="flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition duration-200">
-          Agregar al carrito
+        <button type="button"(click)="addToCart(product?.idProduct!)" [disabled]="product?.stateProduct !== 'Available'"class="flex-1 py-2 rounded transition duration-200 text-white disabled:bg-gray-400 disabled:cursor-not-allowed bg-blue-600 hover:bg-blue-700">
+          <span [ngClass]="{'line-through': product?.stateProduct !== 'Available'}">
+          {{ product?.stateProduct === 'Available' ? 'Agregar al carrito' : 'Agotado' }}
+          </span>
         </button>
         <button (click)="goBack()"
                 class="flex-1 bg-gray-200 text-gray-700 py-2 rounded hover:bg-gray-300 transition duration-200">

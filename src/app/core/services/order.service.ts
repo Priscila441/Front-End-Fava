@@ -4,12 +4,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Order } from '../models/order.model';
 import { OrderPatchPaymethod } from '../models/orderPatchPaymethod.model';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  private apiUrl = 'http://localhost:5054/api/Order';
+  private apiUrl = environment.API_URL+'/Order';
 
   constructor(private http: HttpClient) {}
 

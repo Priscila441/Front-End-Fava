@@ -10,11 +10,12 @@
           <div class="p-4 flex flex-col flex-grow">
             <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ product.nameProduct }}</h3>
             <p class="text-gray-600 flex-grow">{{ product.description }}</p>
-            <p class="mt-4 font-bold text-gray-900">Precio: ${{ product.price }}</p>
-            <button (click)="addToCart(product.idProduct)" class="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white py-2 rounded transition-colors duration-150">
-              Agregar al Carrito
-            </button>
-          </div>
+            <p class="mt-2 font-bold text-gray-900">${{ product.price }}</p>
+            <button type="button" (click)="addToCart(product.idProduct)" [disabled]="product.stateProduct !== 'Available'" class="py-1 rounded text-white bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed w-full mt-2">
+              <span [ngClass]="{'line-through': product.stateProduct !== 'Available'}">
+                {{ product.stateProduct === 'Available' ? 'Agregar' : 'Agotado' }}
+              </span>
+            </button>  </div>
         </div>
       }
     </div>

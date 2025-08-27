@@ -3,6 +3,7 @@ import { User } from '../models/user.model';
 import {jwtDecode} from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { environment } from '../../../environments/environment.development';
 
 
 interface DecodedToken {
@@ -19,7 +20,7 @@ export class AuthService {
   private readonly TOKEN_KEY = 'token';
   private readonly USER_KEY = 'user';
 
-  private apiUrl = 'http://localhost:5054/api/User';
+  private apiUrl = environment.API_URL+'/User';
 
   constructor(private http: HttpClient) {}
 
